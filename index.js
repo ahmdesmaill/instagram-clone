@@ -29,7 +29,7 @@ const posts = [
   },
 ];
 
-const postTemplate = `<article class="post">
+const postTemplate = `<article id="{{ id }}" class="post">
         <header class="post-header">
           <img
             class="avatar"
@@ -43,7 +43,7 @@ const postTemplate = `<article class="post">
         </header>
 
         <figure class="post-media">
-          <img src="{{ post }}" alt="" />
+          <img src="{{ post }}" alt="" ondblclick="likePostByDBLClick('{{ id }}')" />
           <figcaption class="sr-only">
             Image posted by {{ name }}
           </figcaption>
@@ -51,8 +51,8 @@ const postTemplate = `<article class="post">
 
         <div class="post-body">
           <div class="actions" role="group" aria-label="Post actions">
-            <button class="icon-btn" aria-label="Like">
-              <img src="images/icon-heart.png" alt="" aria-hidden="true" />
+            <button class="icon-btn" onclick="likePostByIcon('{{ id }}')" aria-label="Like">
+              <img src="images/icon-heart.png" id="heart-icon" alt="" aria-hidden="true" />
             </button>
             <button class="icon-btn" aria-label="Comment">
               <img src="images/icon-comment.png" alt="" aria-hidden="true" />
@@ -69,10 +69,13 @@ const postTemplate = `<article class="post">
         </div>
       </article>
 `;
+let likedPosts = new Set();
 
-function convertLikesToLocaleFormat() {
+function handlePostsData() {
+  let idCounter = 1;
   for (const post of posts) {
-    post.likes = post.likes.toLocaleString();
+    post.id = `post-${idCounter}`;
+    idCounter++;
   }
 }
 
@@ -89,5 +92,51 @@ function renderPosts() {
 
   mainElement.innerHTML = allPostsHTMLString;
 }
-convertLikesToLocaleFormat();
+
+function isLikedPost(postId) {
+  return likedPosts.has(postId);
+}
+
+function likePost(postId) {
+  likedPosts.add(postId);
+  let postData = posts[postId.split("-")[1] - 1];
+  postData.likes++;
+
+  const postEl = document.querySelector("#" + postId);
+  console.log(postEl);
+  const heartIconEl = postEl.querySelector("#heart-icon");
+  heartIconEl.classList.add("liked-heart-icon");
+
+  const likesEl = postEl.querySelector(".likes").querySelector("span");
+  likesEl.textContent = `${postData.likes} likes`;
+}
+
+function unlikePost(postId) {
+  likedPosts.delete(postId);
+  let postData = posts[postId.split("-")[1] - 1];
+  postData.likes--;
+
+  const postEl = document.querySelector("#" + postId);
+  console.log(postEl);
+  const heartIconEl = postEl.querySelector("#heart-icon");
+  heartIconEl.classList.remove("liked-heart-icon");
+
+  const likesEl = postEl.querySelector(".likes").querySelector("span");
+  likesEl.textContent = `${postData.likes} likes`;
+}
+
+function likePostByIcon(id) {
+  if (isLikedPost(id)) {
+    unlikePost(id);
+  } else {
+    likePost(id);
+  }
+}
+
+function likePostByDBLClick(id) {
+  if (!isLikedPost(id)) {
+    likePost(id);
+  }
+}
+handlePostsData();
 renderPosts();

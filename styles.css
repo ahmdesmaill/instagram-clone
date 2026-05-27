@@ -93,10 +93,14 @@ figure.post-media {
   height: 24px;
   display: block;
 }
+.liked-heart-icon {
+  transition: 0.2s;
+  filter: invert(15%) sepia(95%) saturate(6934%) hue-rotate(358deg)
+    brightness(95%) contrast(112%);
+}
 
 .likes {
   margin: 9px 0 4px;
-  font-weight: 700;
 }
 .caption {
   margin: 0;
