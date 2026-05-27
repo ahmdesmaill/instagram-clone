@@ -84,6 +84,10 @@ figure.post-media {
   padding: 0;
   cursor: pointer;
 }
+.icon-btn:hover {
+  transition: 0.2s;
+  opacity: 0.2;
+}
 .icon-btn img {
   width: 24px;
   height: 24px;
