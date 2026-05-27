@@ -1,22 +1,77 @@
 <!doctype html>
 <html lang="en">
   <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
     <title>Instagram ✨</title>
     <link rel="stylesheet" href="styles.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
   </head>
 
   <body>
-    <header>
-      <img
-        id="logo-img"
-        src="images/logo.png"
-        alt="Official Instagram stylized text logo."
-      />
-      <img
-        id="user-avatar-img"
-        src="images/user-avatar.png"
-        alt="User's avatar"
-      />
+    <header class="site-header">
+      <a href="#" class="logo-link" aria-label="Home">
+        <img
+          class="logo"
+          src="images/logo.png"
+          alt="Instagram's official text logo"
+        />
+      </a>
+      <a href="#" class="profile-link" aria-label="Your profile">
+        <img
+          class="avatar"
+          src="images/user-avatar.png"
+          alt="Your profile avatar"
+        />
+      </a>
     </header>
+
+    <main>
+      <article class="post">
+        <header class="post-header">
+          <img
+            class="avatar"
+            src="images/avatar-vangogh.jpg"
+            alt="Vincent van Gogh profile avatar"
+          />
+          <div class="post-meta">
+            <p class="name">Vincent van Gogh</p>
+            <p class="location">Zudert, Netherlands</p>
+          </div>
+        </header>
+
+        <figure class="post-media">
+          <img src="images/post-vangogh.jpg" alt="" />
+          <figcaption class="sr-only">
+            Image posted by Vincent van Gogh
+          </figcaption>
+        </figure>
+
+        <div class="post-body">
+          <div class="actions" role="group" aria-label="Post actions">
+            <button class="icon-btn" aria-label="Like">
+              <img src="images/icon-heart.png" alt="" aria-hidden="true" />
+            </button>
+            <button class="icon-btn" aria-label="Comment">
+              <img src="images/icon-comment.png" alt="" aria-hidden="true" />
+            </button>
+            <button class="icon-btn" aria-label="Share">
+              <img src="images/icon-dm.png" alt="" aria-hidden="true" />
+            </button>
+          </div>
+
+          <p class="likes"><span class="text-bold">21,492 likes</span></p>
+          <p class="caption">
+            <span class="text-bold">vincey1853</span> just took a few mushrooms
+            lol
+          </p>
+        </div>
+      </article>
+    </main>
   </body>
 </html>
